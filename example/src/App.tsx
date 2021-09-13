@@ -1,18 +1,39 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import DoubleSlider from 'react-native-double-slider';
+import { StyleSheet, Text, Vibration, View } from 'react-native';
+import { DoubleSlider } from 'react-native-double-slider';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    DoubleSlider.multiply(3, 7).then(setResult);
-  }, []);
+  const [hello, setHello] = React.useState('hello');
+  const triggerList = [
+    {
+      predicate: (dx: number) => dx > 0.5,
+      onTrigger: () => setHello(`helloooooo ${Math.random()}`),
+    },
+    {
+      predicate: (dx: number) => dx < -0.5,
+      onTrigger: () => setHello(`goodbye ${Math.random()}`),
+    },
+    {
+      predicate: (dx: number) => dx < 0.3 && dx > -0.3,
+      onTrigger: () => Vibration.vibrate(25),
+    },
+  ];
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <DoubleSlider
+        triggers={triggerList}
+        barStyle={styles.customBarStyle}
+        left={{ idleText: 'EDIT', transitioningText: 'Next exercise' }}
+        right={{ idleText: 'NEXT', transitioningText: 'Edit exercise' }}
+        target={{
+          component: <View style={styles.targetStyle} />,
+          position: 0.6,
+        }}
+        handleStyle={styles.handleStyle}
+      />
+      <Text>{hello}</Text>
     </View>
   );
 }
@@ -28,4 +49,17 @@ const styles = StyleSheet.create({
     height: 60,
     marginVertical: 20,
   },
+  customBarStyle: {
+    backgroundColor: 'crimson',
+    borderRadius: 20,
+    height: 40,
+  },
+  targetStyle: {
+    height: 75,
+    width: 75,
+    borderWidth: 1,
+    borderRadius: 50,
+    borderColor: 'black',
+  },
+  handleStyle: { width: 70, height: 70, opacity: 0.65 },
 });

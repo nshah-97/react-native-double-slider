@@ -4,7 +4,7 @@
   "description": "A simple and customisable double slider component for react native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
-  "types": "lib/typescript/index.d.ts",
+  "types": "lib/typescript/types.ts",
   "react-native": "src/index",
   "source": "src/index",
   "files": [
@@ -80,7 +80,6 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn lint && yarn typescript"
     }
   },
