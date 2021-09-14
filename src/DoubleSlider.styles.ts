@@ -29,21 +29,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
   },
-
+  textContainer: {
+    position: 'absolute',
+  },
   text: {
     color: '#ffffff',
-    position: 'absolute',
     alignSelf: 'center',
   },
-  leftText: {
-    left: 50,
-  },
-  rightText: {
-    right: 50,
-  },
+  leftText: { left: '10%' },
+  rightText: { right: '10%' },
   targetContainer: {
     position: 'absolute',
-    // alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -33,40 +33,56 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
       }}
     >
       {left && left.idleText && (
-        <Animated.Text
-          style={[styles.text, styles.leftText, { opacity: idleTextOpacity }]}
+        <Animated.View
+          style={[
+            styles.textContainer,
+            { opacity: idleTextOpacity },
+            styles.leftText,
+          ]}
         >
-          {left.idleText}
-        </Animated.Text>
+          <Animated.Text style={[styles.text]}>{left.idleText}</Animated.Text>
+        </Animated.View>
       )}
       {left && left.transitioningText && (
-        <Animated.Text
+        <Animated.View
           style={[
-            styles.text,
-            styles.leftText,
+            styles.textContainer,
             { opacity: increasingInterpolatePositive },
+            styles.leftText,
           ]}
         >
-          {left.transitioningText}
-        </Animated.Text>
+          <Animated.Text style={[styles.text]}>
+            {left.transitioningText}
+          </Animated.Text>
+        </Animated.View>
       )}
       {right && right.idleText && (
-        <Animated.Text
-          style={[styles.text, styles.rightText, { opacity: idleTextOpacity }]}
-        >
-          {right.idleText}
-        </Animated.Text>
-      )}
-      {right && right.transitioningText && (
-        <Animated.Text
+        <Animated.View
           style={[
-            styles.text,
+            styles.textContainer,
+            { opacity: idleTextOpacity },
             styles.rightText,
-            { opacity: decreasingInterpolateNegative },
           ]}
         >
-          {right.transitioningText}
-        </Animated.Text>
+          <Animated.Text style={[styles.text, { opacity: idleTextOpacity }]}>
+            {right.idleText}
+          </Animated.Text>
+        </Animated.View>
+      )}
+      {right && right.transitioningText && (
+        <Animated.View
+          style={[
+            styles.textContainer,
+            { opacity: decreasingInterpolateNegative },
+            styles.rightText,
+          ]}
+        >
+          <Animated.Text
+            style={[styles.text, { opacity: decreasingInterpolateNegative }]}
+          >
+            {right.transitioningText}
+          </Animated.Text>
+        </Animated.View>
       )}
       {/* left target */}
       {target && (

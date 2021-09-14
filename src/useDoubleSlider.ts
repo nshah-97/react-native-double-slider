@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Animated, PanResponder } from 'react-native';
 
 // Props list
@@ -24,10 +24,6 @@ export const useDoubleSlider = (triggers: Trigger[]) => {
     [sliderWidth, targetContainerWidth]
   );
 
-  useEffect(
-    () => console.log(sliderWidth, targetContainerWidth),
-    [sliderWidth, targetContainerWidth]
-  );
   const minDx = -sliderWidth / 2;
   const maxDx = sliderWidth / 2;
 
