@@ -20,7 +20,6 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
     increasingInterpolatePositive,
     decreasingInterpolateNegative,
     idleTextOpacity,
-    calculateTargetPositionFromNormalised,
     setTargetContainerWidth,
   } = useDoubleSlider(triggers);
 
