@@ -63,9 +63,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
             styles.rightText,
           ]}
         >
-          <Animated.Text style={[styles.text, { opacity: idleTextOpacity }]}>
-            {right.idleText}
-          </Animated.Text>
+          <Animated.Text style={[styles.text]}>{right.idleText}</Animated.Text>
         </Animated.View>
       )}
       {right && right.transitioningText && (
@@ -76,9 +74,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
             styles.rightText,
           ]}
         >
-          <Animated.Text
-            style={[styles.text, { opacity: decreasingInterpolateNegative }]}
-          >
+          <Animated.Text style={[styles.text]}>
             {right.transitioningText}
           </Animated.Text>
         </Animated.View>
