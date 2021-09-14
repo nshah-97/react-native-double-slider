@@ -94,7 +94,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
           style={[
             styles.targetContainer,
             {
-              right: calculateTargetPositionFromNormalised(target.position),
+              left: `${target.position}%`,
               opacity: decreasingInterpolateNegative,
             },
           ]}
@@ -108,7 +108,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
           style={[
             styles.targetContainer,
             {
-              left: calculateTargetPositionFromNormalised(target.position),
+              right: `${target.position}%`,
               opacity: increasingInterpolatePositive,
             },
           ]}
