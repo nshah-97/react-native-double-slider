@@ -1,10 +1,11 @@
 import type React from 'react';
-import type { ViewStyle } from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native';
 
 export interface DoubleSliderProps {
   triggers: Trigger[];
   barStyle?: ViewStyle;
   handleStyle?: ViewStyle;
+  textStyle?: TextStyle;
   customHandle?: React.ReactNode;
   left?: Items;
   right?: Items;

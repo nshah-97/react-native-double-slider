@@ -1,9 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { Animated, PanResponder } from 'react-native';
 
-// Props list
-// -
-
 interface Trigger {
   predicate: (dx: number) => boolean; // dx is between -1 and 1
   onTrigger: () => void;
