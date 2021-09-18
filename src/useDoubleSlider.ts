@@ -1,5 +1,6 @@
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Animated, PanResponder } from 'react-native';
+import { constrainXBetweenMinAndMax } from './utils/number.utils';
 
 interface Trigger {
   predicate: (dx: number) => boolean; // dx is between -1 and 1
@@ -10,20 +11,16 @@ export const useDoubleSlider = (triggers: Trigger[]) => {
   const slideValueRef = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
   const idleTextOpacity = useRef(new Animated.Value(1)).current;
   const [sliderWidth, setSliderWidth] = useState(0);
-  const [targetContainerWidth, setTargetContainerWidth] = useState(0);
-  const calculateTargetPositionFromNormalised = useCallback(
-    (normalised: number): number => {
-      const abs = Math.min(Math.abs(normalised), 1);
-      const ans =
-        (sliderWidth / 2) * abs + sliderWidth / 2 - targetContainerWidth / 2;
-      return ans;
-    },
-    [sliderWidth, targetContainerWidth]
-  );
 
   const minDx = -sliderWidth / 2;
   const maxDx = sliderWidth / 2;
 
+  const calculateTargetPosition = (percentPosition: number) => {
+    return (
+      (constrainXBetweenMinAndMax(Math.abs(percentPosition), 0, 100) / 100) *
+      maxDx
+    );
+  };
   const constrainedDx = slideValueRef.x.interpolate({
     inputRange: [minDx, maxDx],
     outputRange: [minDx, maxDx],
@@ -96,8 +93,6 @@ export const useDoubleSlider = (triggers: Trigger[]) => {
 
   return {
     panResponder,
-    setSliderWidth,
-    setTargetContainerWidth,
     sliderWidth,
     constrainedDx,
     increasingInterpolatePositive,
@@ -105,6 +100,7 @@ export const useDoubleSlider = (triggers: Trigger[]) => {
     increasingInterpolateNegative,
     decreasingInterpolateNegative,
     idleTextOpacity,
-    calculateTargetPositionFromNormalised,
+    setSliderWidth,
+    calculateTargetPosition,
   };
 };

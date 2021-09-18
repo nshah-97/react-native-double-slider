@@ -29,7 +29,7 @@ export default function App() {
         right={{ idleText: 'NEXT', transitioningText: 'Edit exercise' }}
         target={{
           component: <View style={styles.targetStyle} />,
-          position: 0.65,
+          position: 20,
         }}
         handleStyle={styles.handleStyle}
       />

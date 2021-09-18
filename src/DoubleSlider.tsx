@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Animated, LayoutChangeEvent } from 'react-native';
+import { View, Animated } from 'react-native';
 import { styles } from './DoubleSlider.styles';
 import { useDoubleSlider } from './useDoubleSlider';
 import type { DoubleSliderProps } from './types';
@@ -20,8 +20,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
     increasingInterpolatePositive,
     decreasingInterpolateNegative,
     idleTextOpacity,
-    setTargetContainerWidth,
-    calculateTargetPositionFromNormalised,
+    calculateTargetPosition,
   } = useDoubleSlider(triggers);
 
   return (
@@ -83,14 +82,10 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
       {/* left target */}
       {target && (
         <Animated.View
-          onLayout={(e: LayoutChangeEvent) => {
-            const { width } = e.nativeEvent.layout;
-            setTargetContainerWidth(width);
-          }}
           style={[
             styles.targetContainer,
             {
-              right: calculateTargetPositionFromNormalised(target.position),
+              left: calculateTargetPosition(target.position),
               opacity: decreasingInterpolateNegative,
             },
           ]}
@@ -104,7 +99,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
           style={[
             styles.targetContainer,
             {
-              left: calculateTargetPositionFromNormalised(target.position),
+              right: calculateTargetPosition(target.position),
               opacity: increasingInterpolatePositive,
             },
           ]}

@@ -39,8 +39,8 @@ export const styles = StyleSheet.create({
   leftText: { left: '10%' },
   rightText: { right: '10%' },
   targetContainer: {
-    position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'absolute',
   },
 });
