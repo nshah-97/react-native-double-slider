@@ -3,6 +3,7 @@ import { View, Animated } from 'react-native';
 import { styles } from './DoubleSlider.styles';
 import { useDoubleSlider } from './useDoubleSlider';
 import type { DoubleSliderProps } from './types';
+import Chevron from './Components/Chevron';
 
 export const DoubleSlider: React.FC<DoubleSliderProps> = ({
   triggers,
@@ -114,7 +115,9 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
         ]}
         {...panResponder.panHandlers}
       >
+        <Chevron.Left />
         {customHandle ?? <View style={[styles.handle, handleStyle]} />}
+        <Chevron.Right />
       </Animated.View>
     </View>
   );

@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
+    flexDirection: 'row',
   },
   textContainer: {
     position: 'absolute',

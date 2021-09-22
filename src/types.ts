@@ -16,11 +16,6 @@ export interface Trigger {
   onTrigger: () => void;
 }
 
-export interface Texts {
-  right?: string;
-  left?: string;
-}
-
 export interface Items {
   idleText?: string;
   transitioningText?: string;

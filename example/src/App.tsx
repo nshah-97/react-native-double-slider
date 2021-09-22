@@ -1,39 +1,63 @@
 import * as React from 'react';
+import { useState } from 'react';
 
-import { StyleSheet, Text, Vibration, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { DoubleSlider } from 'react-native-double-slider';
 
 export default function App() {
-  const [hello, setHello] = React.useState('hello');
+  const [colour, setColour] = useState('black');
+  const [message, setMessage] = useState('');
+  const [borderColour, setBorderColour] = useState('grey');
+  const randomColour = () => {
+    return Math.floor(Math.random() * 16777215).toString(16);
+  };
+
   const triggerList = [
     {
       predicate: (dx: number) => dx > 0.5,
-      onTrigger: () => setHello(`helloooooo ${Math.random()}`),
+      onTrigger: () => {
+        setColour(`#${randomColour()}`);
+        setMessage('');
+      },
     },
     {
       predicate: (dx: number) => dx < -0.5,
-      onTrigger: () => setHello(`goodbye ${Math.random()}`),
+      onTrigger: () => {
+        setBorderColour(`#${randomColour()}`);
+        setMessage('');
+      },
     },
     {
       predicate: (dx: number) => dx < 0.3 && dx > -0.3,
-      onTrigger: () => Vibration.vibrate(25),
+      onTrigger: () =>
+        setMessage('Move the slider further out to trigger an action!'),
     },
   ];
 
   return (
     <View style={styles.container}>
-      <DoubleSlider
-        triggers={triggerList}
-        barStyle={styles.customBarStyle}
-        left={{ idleText: 'EDIT', transitioningText: 'Next exercise' }}
-        right={{ idleText: 'NEXT', transitioningText: 'Edit exercise' }}
-        target={{
-          component: <View style={styles.targetStyle} />,
-          position: 20,
-        }}
-        handleStyle={styles.handleStyle}
+      <Text>{message}</Text>
+      <View
+        style={[
+          styles.box,
+          { borderColor: borderColour, backgroundColor: colour },
+        ]}
       />
-      <Text>{hello}</Text>
+      <View style={styles.sliderContainer}>
+        <DoubleSlider
+          triggers={triggerList}
+          barStyle={styles.customBarStyle}
+          handleStyle={styles.handleStyle}
+          left={{
+            idleText: 'Border Colour',
+            transitioningText: 'Change Main Colour',
+          }}
+          right={{
+            idleText: 'Main Colour',
+            transitioningText: 'Change Border Colour',
+          }}
+        />
+      </View>
     </View>
   );
 }
@@ -44,15 +68,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  sliderContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
   box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+    width: 200,
+    height: 200,
+    borderWidth: 35,
+    borderRadius: 15,
+    marginVertical: 50,
   },
   customBarStyle: {
-    backgroundColor: 'crimson',
+    backgroundColor: '#808080',
     borderRadius: 20,
     height: 40,
+    marginVertical: 25,
   },
   targetStyle: {
     height: 75,
@@ -61,5 +93,9 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: 'black',
   },
-  handleStyle: { width: 70, height: 70, opacity: 0.65 },
+  handleStyle: {
+    width: 80,
+    height: 60,
+    backgroundColor: '#000000',
+  },
 });
