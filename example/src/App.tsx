@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   handleStyle: {
-    width: 80,
+    width: 60,
     height: 60,
     backgroundColor: '#000000',
   },

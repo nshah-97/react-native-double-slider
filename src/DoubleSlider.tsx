@@ -115,9 +115,9 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
         ]}
         {...panResponder.panHandlers}
       >
-        <Chevron.Left />
+        <Chevron.Left opacity={idleTextOpacity} />
         {customHandle ?? <View style={[styles.handle, handleStyle]} />}
-        <Chevron.Right />
+        <Chevron.Right opacity={idleTextOpacity} />
       </Animated.View>
     </View>
   );

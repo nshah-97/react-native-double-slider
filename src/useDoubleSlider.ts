@@ -50,49 +50,50 @@ export const useDoubleSlider = (triggers: Trigger[]) => {
     extrapolate: 'clamp',
   });
 
-  const normaliseDx = (x: number) => {
-    return x > 0 ? Math.min(maxDx, x) / maxDx : Math.max(x, minDx) / maxDx;
-  };
+  const normaliseDx = (x: number) =>
+    x > 0 ? Math.min(maxDx, x) / maxDx : Math.max(x, minDx) / maxDx;
 
-  const panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onPanResponderGrant: () => {
-      Animated.timing(idleTextOpacity, {
-        toValue: 0,
-        duration: 50,
-        useNativeDriver: false,
-      }).start();
-    },
-    onPanResponderMove: Animated.event(
-      [null, { dx: slideValueRef.x, dy: slideValueRef.y }],
-      { useNativeDriver: false }
-    ),
-    onPanResponderRelease: () => {
-      slideValueRef.x.addListener((panEvent) => {
-        const normalisedDx = normaliseDx(panEvent.value);
-        triggers.forEach((t) => {
-          if (t.predicate(normalisedDx)) {
-            t.onTrigger();
-            return;
-          }
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => {
+        Animated.timing(idleTextOpacity, {
+          toValue: 0,
+          duration: 100,
+          useNativeDriver: false,
+        }).start();
+      },
+      onPanResponderMove: Animated.event(
+        [null, { dx: slideValueRef.x, dy: slideValueRef.y }],
+        { useNativeDriver: false }
+      ),
+      onPanResponderRelease: () => {
+        slideValueRef.x.addListener((panEvent) => {
+          const normalisedDx = normaliseDx(panEvent.value);
+          triggers.forEach((t) => {
+            if (t.predicate(normalisedDx)) {
+              t.onTrigger();
+              return;
+            }
+          });
+          slideValueRef.x.removeAllListeners();
         });
-        slideValueRef.x.removeAllListeners();
-      });
-      Animated.spring(slideValueRef, {
-        useNativeDriver: true,
-        toValue: { x: 0, y: 0 },
-      }).start();
-      Animated.timing(idleTextOpacity, {
-        toValue: 1,
-        delay: 500,
-        duration: 250,
-        useNativeDriver: false,
-      }).start();
-    },
-  });
+        Animated.spring(slideValueRef, {
+          useNativeDriver: true,
+          toValue: { x: 0, y: 0 },
+        }).start();
+        Animated.timing(idleTextOpacity, {
+          toValue: 1,
+          delay: 500,
+          duration: 250,
+          useNativeDriver: false,
+        }).start();
+      },
+    })
+  );
 
   return {
-    panResponder,
+    panResponder: panResponder.current,
     sliderWidth,
     constrainedDx,
     increasingInterpolatePositive,
