@@ -41,7 +41,7 @@ export const App = () => {
 | customHandle | `React.ReactNode`                                             | A optional custom handle that will be used instead of the default.                                                                                                                                  |
 | left         | `{ idleText?: string, transitioningText?: string }`           | Text displayed on the left side. `idleText` is shown before interaction and `transitioningText` is shown whilst the user is moving the handle.                                                      |
 | right        | `{ idleText?: string, transitioningText?: string }`           | Text displayed on the right side. `idleText` is shown before interaction and `transitioningText` is shown whilst the user is moving the handle.                                                     |
-| target       | `{ component: React.ReactNode, position: number }`            | A optional component that is shown on both sides to inform the user where to release the handle to trigger the action. `position` is the position of the target component from either end.          |
+| target       | `{ component: React.ReactNode, position: number }`            | A optional component that is shown on both sides to inform the user where to release the handle to trigger the action. `position` is the absolute position of the target component from either end.          |
 
 ## License
 
