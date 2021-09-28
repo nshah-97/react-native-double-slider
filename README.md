@@ -1,7 +1,7 @@
 # react-native-double-slider
 
 A simple and customisable double slider component for react native.
-![Double Slider Gif](./readme/assets/double-slider.gif | width=100)
+![double-slider](https://user-images.githubusercontent.com/53956539/135172506-d7caa294-5142-4dd7-b636-27f32477207e.gif)
 
 ## Installation
 
