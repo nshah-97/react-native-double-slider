@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
-
 import { StyleSheet, Text, View } from 'react-native';
-import { DoubleSlider } from 'react-native-double-slider';
+import { DoubleSlider, Trigger } from 'react-native-double-slider';
 
 export default function App() {
   const [colour, setColour] = useState('black');
@@ -12,24 +11,24 @@ export default function App() {
     return Math.floor(Math.random() * 16777215).toString(16);
   };
 
-  const triggerList = [
+  const triggerList: Trigger[] = [
     {
       predicate: (dx: number) => dx > 0.5,
-      onTrigger: () => {
+      action: () => {
         setColour(`#${randomColour()}`);
         setMessage('');
       },
     },
     {
       predicate: (dx: number) => dx < -0.5,
-      onTrigger: () => {
+      action: () => {
         setBorderColour(`#${randomColour()}`);
         setMessage('');
       },
     },
     {
       predicate: (dx: number) => dx < 0.3 && dx > -0.3,
-      onTrigger: () =>
+      action: () =>
         setMessage('Move the slider further out to trigger an action!'),
     },
   ];

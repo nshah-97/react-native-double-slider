@@ -13,7 +13,7 @@ export interface DoubleSliderProps {
 }
 export interface Trigger {
   predicate: (dx: number) => boolean;
-  onTrigger: () => void;
+  action: () => void;
 }
 
 export interface Items {

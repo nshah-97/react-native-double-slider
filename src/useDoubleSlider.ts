@@ -1,11 +1,7 @@
 import { useRef, useState } from 'react';
 import { Animated, PanResponder } from 'react-native';
+import type { Trigger } from './types';
 import { constrainXBetweenMinAndMax } from './utils/number.utils';
-
-interface Trigger {
-  predicate: (dx: number) => boolean; // dx is between -1 and 1
-  onTrigger: () => void;
-}
 
 export const useDoubleSlider = (triggers: Trigger[]) => {
   const slideValueRef = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
@@ -53,47 +49,45 @@ export const useDoubleSlider = (triggers: Trigger[]) => {
   const normaliseDx = (x: number) =>
     x > 0 ? Math.min(maxDx, x) / maxDx : Math.max(x, minDx) / maxDx;
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderGrant: () => {
-        Animated.timing(idleTextOpacity, {
-          toValue: 0,
-          duration: 100,
-          useNativeDriver: false,
-        }).start();
-      },
-      onPanResponderMove: Animated.event(
-        [null, { dx: slideValueRef.x, dy: slideValueRef.y }],
-        { useNativeDriver: false }
-      ),
-      onPanResponderRelease: () => {
-        slideValueRef.x.addListener((panEvent) => {
-          const normalisedDx = normaliseDx(panEvent.value);
-          triggers.forEach((t) => {
-            if (t.predicate(normalisedDx)) {
-              t.onTrigger();
-              return;
-            }
-          });
-          slideValueRef.x.removeAllListeners();
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onPanResponderGrant: () => {
+      Animated.timing(idleTextOpacity, {
+        toValue: 0,
+        duration: 100,
+        useNativeDriver: false,
+      }).start();
+    },
+    onPanResponderMove: Animated.event(
+      [null, { dx: slideValueRef.x, dy: slideValueRef.y }],
+      { useNativeDriver: false }
+    ),
+    onPanResponderRelease: () => {
+      slideValueRef.x.addListener((panEvent) => {
+        const normalisedDx = normaliseDx(panEvent.value);
+        triggers.forEach((t) => {
+          if (t.predicate(normalisedDx)) {
+            t.action();
+            return;
+          }
         });
-        Animated.spring(slideValueRef, {
-          useNativeDriver: true,
-          toValue: { x: 0, y: 0 },
-        }).start();
-        Animated.timing(idleTextOpacity, {
-          toValue: 1,
-          delay: 500,
-          duration: 250,
-          useNativeDriver: false,
-        }).start();
-      },
-    })
-  );
+        slideValueRef.x.removeAllListeners();
+      });
+      Animated.spring(slideValueRef, {
+        useNativeDriver: true,
+        toValue: { x: 0, y: 0 },
+      }).start();
+      Animated.timing(idleTextOpacity, {
+        toValue: 1,
+        delay: 500,
+        duration: 250,
+        useNativeDriver: false,
+      }).start();
+    },
+  });
 
   return {
-    panResponder: panResponder.current,
+    panResponder,
     sliderWidth,
     constrainedDx,
     increasingInterpolatePositive,
