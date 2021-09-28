@@ -1,28 +1,60 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
 import { DoubleSlider, Trigger } from 'react-native-double-slider';
 
 export default function App() {
-  const [colour, setColour] = useState('black');
   const [message, setMessage] = useState('');
-  const [borderColour, setBorderColour] = useState('grey');
-  const randomColour = () => {
-    return Math.floor(Math.random() * 16777215).toString(16);
+  const displacement = useRef(new Animated.Value(0)).current;
+  const rotation = useRef(new Animated.Value(0)).current;
+
+  const bounce = () => {
+    Animated.timing(displacement, {
+      duration: 300,
+      toValue: -200,
+      useNativeDriver: true,
+      easing: Easing.out(Easing.ease),
+    }).start(() =>
+      Animated.timing(displacement, {
+        toValue: 0,
+        duration: 1000,
+        useNativeDriver: true,
+        easing: Easing.bounce,
+      }).start()
+    );
   };
+
+  const spin = () => {
+    Animated.timing(rotation, {
+      duration: 1000,
+      toValue: 2,
+      useNativeDriver: true,
+      easing: Easing.out(Easing.ease),
+    }).start(() => {
+      Animated.spring(rotation, {
+        toValue: 0,
+        useNativeDriver: true,
+        stiffness: 50,
+      }).start();
+    });
+  };
+
+  const interpolateRotating = rotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', `${180}deg`],
+  });
 
   const triggerList: Trigger[] = [
     {
       predicate: (dx: number) => dx > 0.5,
       action: () => {
-        setColour(`#${randomColour()}`);
+        bounce();
         setMessage('');
       },
     },
     {
       predicate: (dx: number) => dx < -0.5,
       action: () => {
-        setBorderColour(`#${randomColour()}`);
+        spin();
         setMessage('');
       },
     },
@@ -36,10 +68,15 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>{message}</Text>
-      <View
+      <Animated.View
         style={[
           styles.box,
-          { borderColor: borderColour, backgroundColor: colour },
+          {
+            transform: [
+              { translateY: displacement },
+              { rotateZ: interpolateRotating },
+            ],
+          },
         ]}
       />
       <View style={styles.sliderContainer}>
@@ -48,13 +85,14 @@ export default function App() {
           barStyle={styles.customBarStyle}
           handleStyle={styles.handleStyle}
           left={{
-            idleText: 'Border Colour',
-            transitioningText: 'Change Main Colour',
+            idleText: 'spin',
+            transitioningText: 'release to jump',
           }}
           right={{
-            idleText: 'Main Colour',
-            transitioningText: 'Change Border Colour',
+            idleText: 'jump',
+            transitioningText: 'release to spin',
           }}
+          textStyle={styles.textStyle}
         />
       </View>
     </View>
@@ -66,6 +104,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#5552FF',
   },
   sliderContainer: {
     alignItems: 'center',
@@ -78,11 +117,13 @@ const styles = StyleSheet.create({
     borderWidth: 35,
     borderRadius: 15,
     marginVertical: 50,
+    backgroundColor: 'white',
+    borderColor: '#a9a8ff',
   },
   customBarStyle: {
-    backgroundColor: '#808080',
-    borderRadius: 20,
-    height: 40,
+    backgroundColor: '#A9A8FF',
+    borderRadius: 50,
+    height: 53,
     marginVertical: 25,
   },
   targetStyle: {
@@ -93,8 +134,16 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   handleStyle: {
-    width: 60,
-    height: 60,
-    backgroundColor: '#000000',
+    width: 65,
+    height: 50,
+    borderRadius: 50,
+    backgroundColor: 'white',
+    borderWidth: 8,
+    borderColor: '#5552FF',
+  },
+  textStyle: {
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    letterSpacing: 4,
   },
 });

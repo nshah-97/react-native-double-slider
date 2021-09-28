@@ -14,15 +14,6 @@ export const styles = StyleSheet.create({
     backgroundColor: 'blue',
     borderRadius: 100,
     position: 'relative',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
   },
   handleContainer: {
     justifyContent: 'center',

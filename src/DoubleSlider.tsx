@@ -13,6 +13,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
   left,
   right,
   target,
+  textStyle,
 }) => {
   const {
     panResponder,
@@ -40,7 +41,9 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
             styles.leftText,
           ]}
         >
-          <Animated.Text style={[styles.text]}>{left.idleText}</Animated.Text>
+          <Animated.Text style={[styles.text, textStyle]}>
+            {left.idleText}
+          </Animated.Text>
         </Animated.View>
       )}
       {left && left.transitioningText && (
@@ -51,7 +54,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
             styles.leftText,
           ]}
         >
-          <Animated.Text style={[styles.text]}>
+          <Animated.Text style={[styles.text, textStyle]}>
             {left.transitioningText}
           </Animated.Text>
         </Animated.View>
@@ -64,7 +67,9 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
             styles.rightText,
           ]}
         >
-          <Animated.Text style={[styles.text]}>{right.idleText}</Animated.Text>
+          <Animated.Text style={[styles.text, textStyle]}>
+            {right.idleText}
+          </Animated.Text>
         </Animated.View>
       )}
       {right && right.transitioningText && (
@@ -75,7 +80,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
             styles.rightText,
           ]}
         >
-          <Animated.Text style={[styles.text]}>
+          <Animated.Text style={[styles.text, textStyle]}>
             {right.transitioningText}
           </Animated.Text>
         </Animated.View>
