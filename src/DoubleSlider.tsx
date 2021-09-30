@@ -14,6 +14,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
   right,
   target,
   textStyle,
+  arrowStyle,
 }) => {
   const {
     panResponder,
@@ -37,8 +38,9 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
         <Animated.View
           style={[
             styles.textContainer,
-            { opacity: idleTextOpacity },
             styles.leftText,
+            { left: left.position ?? '10%' },
+            { opacity: idleTextOpacity },
           ]}
         >
           <Animated.Text style={[styles.text, textStyle]}>
@@ -50,8 +52,9 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
         <Animated.View
           style={[
             styles.textContainer,
-            { opacity: increasingInterpolatePositive },
             styles.leftText,
+            { left: left.position ?? '10%' },
+            { opacity: increasingInterpolatePositive },
           ]}
         >
           <Animated.Text style={[styles.text, textStyle]}>
@@ -63,8 +66,9 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
         <Animated.View
           style={[
             styles.textContainer,
-            { opacity: idleTextOpacity },
             styles.rightText,
+            { right: right.position ?? '10%' },
+            { opacity: idleTextOpacity },
           ]}
         >
           <Animated.Text style={[styles.text, textStyle]}>
@@ -76,8 +80,9 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
         <Animated.View
           style={[
             styles.textContainer,
-            { opacity: decreasingInterpolateNegative },
             styles.rightText,
+            { right: right.position ?? '10%' },
+            { opacity: decreasingInterpolateNegative },
           ]}
         >
           <Animated.Text style={[styles.text, textStyle]}>
@@ -120,9 +125,9 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
         ]}
         {...panResponder.panHandlers}
       >
-        <Chevron.Left opacity={idleTextOpacity} />
+        <Chevron.Left opacity={idleTextOpacity} arrowStyle={arrowStyle} />
         {customHandle ?? <View style={[styles.handle, handleStyle]} />}
-        <Chevron.Right opacity={idleTextOpacity} />
+        <Chevron.Right opacity={idleTextOpacity} arrowStyle={arrowStyle} />
       </Animated.View>
     </View>
   );

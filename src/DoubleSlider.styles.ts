@@ -3,16 +3,21 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   beam: {
     width: '95%',
-    backgroundColor: 'red',
-    height: 25,
+    backgroundColor: 'white',
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 20,
   },
   handle: {
-    height: 50,
-    width: 50,
-    backgroundColor: 'blue',
+    height: 60,
+    width: 60,
+    backgroundColor: 'lightgrey',
     borderRadius: 100,
+    borderWidth: 2,
+    borderColor: 'black',
     position: 'relative',
   },
   handleContainer: {
@@ -25,7 +30,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
   },
   text: {
-    color: '#ffffff',
+    color: '#000000',
     alignSelf: 'center',
   },
   leftText: { left: '10%' },

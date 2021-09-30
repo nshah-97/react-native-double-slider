@@ -7,6 +7,7 @@ export interface DoubleSliderProps {
   handleStyle?: ViewStyle;
   textStyle?: TextStyle;
   customHandle?: React.ReactNode;
+  arrowStyle?: TextStyle;
   left?: Items;
   right?: Items;
   target?: Target;
@@ -19,6 +20,7 @@ export interface Trigger {
 export interface Items {
   idleText?: string;
   transitioningText?: string;
+  position?: string | number;
 }
 
 export interface Target {

@@ -1,23 +1,25 @@
 import React from 'react';
-import { StyleSheet, Animated } from 'react-native';
+import { StyleSheet, Animated, TextStyle } from 'react-native';
 import Icon from 'react-native-vector-icons/EvilIcons';
 
-const Right: React.FC<{ opacity: Animated.AnimatedInterpolation }> = ({
-  opacity,
-}) => {
+const Right: React.FC<{
+  opacity: Animated.AnimatedInterpolation;
+  arrowStyle?: TextStyle;
+}> = ({ opacity, arrowStyle }) => {
   return (
     <Animated.View style={[styles.container, { opacity }]}>
-      <Icon name="chevron-right" color="white" size={25} />
+      <Icon name="chevron-right" color="white" size={25} style={arrowStyle} />
     </Animated.View>
   );
 };
 
-const Left: React.FC<{ opacity: Animated.AnimatedInterpolation }> = ({
-  opacity,
-}) => {
+const Left: React.FC<{
+  opacity: Animated.AnimatedInterpolation;
+  arrowStyle?: TextStyle;
+}> = ({ opacity, arrowStyle }) => {
   return (
     <Animated.View style={[styles.container, { opacity }]}>
-      <Icon name="chevron-left" color="white" size={25} />
+      <Icon name="chevron-left" color="white" size={25} style={arrowStyle} />
     </Animated.View>
   );
 };

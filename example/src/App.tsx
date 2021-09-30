@@ -84,15 +84,18 @@ export default function App() {
           triggers={triggerList}
           barStyle={styles.customBarStyle}
           handleStyle={styles.handleStyle}
+          textStyle={styles.textStyle}
+          arrowStyle={styles.chevronStyle}
           left={{
             idleText: 'spin',
             transitioningText: 'release to jump',
+            position: '10%',
           }}
           right={{
             idleText: 'jump',
             transitioningText: 'release to spin',
+            position: '10%',
           }}
-          textStyle={styles.textStyle}
         />
       </View>
     </View>
@@ -122,6 +125,7 @@ const styles = StyleSheet.create({
   },
   customBarStyle: {
     backgroundColor: '#A9A8FF',
+    borderWidth: undefined,
     borderRadius: 50,
     height: 53,
     marginVertical: 25,
@@ -145,5 +149,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'uppercase',
     letterSpacing: 4,
+    color: 'white',
+  },
+  chevronStyle: {
+    color: 'white',
   },
 });
