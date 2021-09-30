@@ -5,11 +5,13 @@ export const styles = StyleSheet.create({
     width: '95%',
     backgroundColor: 'white',
     height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
     borderWidth: 2,
     borderColor: 'black',
     borderRadius: 20,
+  },
+  beamFixedStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   handle: {
     height: 60,
@@ -18,7 +20,6 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 2,
     borderColor: 'black',
-    position: 'relative',
   },
   handleContainer: {
     justifyContent: 'center',

@@ -8,7 +8,7 @@ const Right: React.FC<{
 }> = ({ opacity, arrowStyle }) => {
   return (
     <Animated.View style={[styles.container, { opacity }]}>
-      <Icon name="chevron-right" color="white" size={25} style={arrowStyle} />
+      <Icon name="chevron-right" color="black" size={25} style={arrowStyle} />
     </Animated.View>
   );
 };
@@ -19,7 +19,7 @@ const Left: React.FC<{
 }> = ({ opacity, arrowStyle }) => {
   return (
     <Animated.View style={[styles.container, { opacity }]}>
-      <Icon name="chevron-left" color="white" size={25} style={arrowStyle} />
+      <Icon name="chevron-left" color="black" size={25} style={arrowStyle} />
     </Animated.View>
   );
 };

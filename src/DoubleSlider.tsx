@@ -28,7 +28,7 @@ export const DoubleSlider: React.FC<DoubleSliderProps> = ({
 
   return (
     <View
-      style={[styles.beam, barStyle]}
+      style={[styles.beam, barStyle, styles.beamFixedStyle]}
       onLayout={(e) => {
         const { width } = e.nativeEvent.layout;
         setSliderWidth(width);

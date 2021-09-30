@@ -81,6 +81,7 @@ export default function App() {
       />
       <View style={styles.sliderContainer}>
         <DoubleSlider
+          // triggers={[]}
           triggers={triggerList}
           barStyle={styles.customBarStyle}
           handleStyle={styles.handleStyle}
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
   },
   customBarStyle: {
     backgroundColor: '#A9A8FF',
-    borderWidth: undefined,
+    borderWidth: 0,
     borderRadius: 50,
     height: 53,
     marginVertical: 25,
