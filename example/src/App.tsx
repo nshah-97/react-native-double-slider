@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
-import { DoubleSlider, Trigger } from 'react-native-double-slider';
+import { DoubleSlider } from 'react-native-double-slider';
+import type { Trigger } from '../../lib/typescript/types';
 
 export default function App() {
   const [message, setMessage] = useState('');
