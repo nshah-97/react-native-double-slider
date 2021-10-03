@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
-import { DoubleSlider, Trigger } from 'react-native-double-slider';
+import { DoubleSlider } from 'react-native-double-slider';
+import type { Trigger } from '../../lib/typescript/types';
 
 export default function App() {
   const [message, setMessage] = useState('');
@@ -81,18 +82,22 @@ export default function App() {
       />
       <View style={styles.sliderContainer}>
         <DoubleSlider
+          // triggers={[]}
           triggers={triggerList}
           barStyle={styles.customBarStyle}
           handleStyle={styles.handleStyle}
+          textStyle={styles.textStyle}
+          arrowStyle={styles.chevronStyle}
           left={{
             idleText: 'spin',
             transitioningText: 'release to jump',
+            position: '10%',
           }}
           right={{
             idleText: 'jump',
             transitioningText: 'release to spin',
+            position: '10%',
           }}
-          textStyle={styles.textStyle}
         />
       </View>
     </View>
@@ -122,6 +127,7 @@ const styles = StyleSheet.create({
   },
   customBarStyle: {
     backgroundColor: '#A9A8FF',
+    borderWidth: 0,
     borderRadius: 50,
     height: 53,
     marginVertical: 25,
@@ -145,5 +151,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'uppercase',
     letterSpacing: 4,
+    color: 'white',
+  },
+  chevronStyle: {
+    color: 'white',
   },
 });

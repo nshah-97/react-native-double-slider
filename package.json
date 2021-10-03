@@ -4,9 +4,9 @@
   "description": "A simple and customisable double slider component for react native.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
-  "types": "lib/typescript/types.ts",
+  "types": "lib/typescript/index.d.ts",
   "react-native": "src/index",
-  "source": "src/index",
+  "source": "src/index.tsx",
   "files": [
     "src",
     "lib",
@@ -33,9 +33,12 @@
     "lint:fix": "eslint \"**/*.{js,ts,tsx}\" --fix"
   },
   "keywords": [
-    "react-native",
+    "react native",
     "ios",
-    "android"
+    "android",
+    "ui component",
+    "double slider",
+    "slider"
   ],
   "repository": "https://github.com/nshah-97/react-native-double-slider",
   "author": "Nikhil Shah <nikhilshah@rocketmail.com> (https://github.com/nshah-97)",
@@ -49,7 +52,6 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
-    "@expo/vector-icons": "^12.0.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "@release-it/conventional-changelog": "^2.0.0",
     "@types/jest": "^26.0.0",
@@ -152,6 +154,5 @@
         }
       ]
     ]
-  },
-  "dependencies": {}
+  }
 }
